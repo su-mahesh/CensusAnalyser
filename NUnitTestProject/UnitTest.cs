@@ -33,7 +33,7 @@ namespace NUnitTestProject
         /// </summary>
         static readonly string IndianStateCodeFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IndiaStateCodeData.csv";
         static readonly string NonExistIndiaStateCodeFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCodeData.csv";
-
+        static readonly string IncorrectTypeIndianIndiaStateCodeFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IndiaStateCodeData.txt";
         /// <summary>
         /// The census analyser object declaration
         /// </summary>
@@ -114,6 +114,16 @@ namespace NUnitTestProject
         {
             var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, NonExistIndiaStateCodeFilePath, IndianStateCodeHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, CensusException.exceptionType);
+        }
+
+        /// <summary>
+        /// Givens the incorrect type indian state code file when readed should return custom exception.
+        /// </summary>
+        [Test]
+        public void GivenIncorrectTypeIndianStateCodeFile_WhenReaded_ShouldReturnCustomException()
+        {
+            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, IncorrectTypeIndianIndiaStateCodeFilePath, IndianStateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE, CensusException.exceptionType);
         }
     }
 }
