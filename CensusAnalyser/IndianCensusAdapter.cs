@@ -24,6 +24,10 @@ namespace IndianStateCensusAnalyser
             censusData = GetCensusData(csvFilePath, dataHeaders);
             foreach (string data in censusData.Skip(1))
             {
+                if (!data.Contains(","))
+                {
+                    throw new CensusAnalyserException("file contains wrong delimiter", CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER);
+                }
                 string[] column = data.Split(",");               
                 if (csvFilePath.Contains("IndiaStateCensusData.csv"))
                     dataMap.Add(column[0], new CensusDTO(new CensusDataDAO(column[0], column[1], column[2], column[3])));

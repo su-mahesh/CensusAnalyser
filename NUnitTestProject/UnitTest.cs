@@ -15,12 +15,13 @@ namespace NUnitTestProject
         static readonly string IndianStateCensusFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/IndiaStateCensusData.csv";
         static readonly string WrongIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCensusData.csv";
         static readonly string IncorrectTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/IndiaStateCensusData.txt";
-
+        static readonly string IncorrectDelimiterTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IncorrectDelimiterIndiaStateCensusData.csv";
         /// <summary>
         /// The census analyser object declaration
         /// </summary>
         CensusAnalyser censusAnalyser;
         Dictionary<string, CensusDTO> totalRecord;
+       
 
         /// <summary>
         /// Setups this instance to inilialise objects
@@ -52,6 +53,14 @@ namespace NUnitTestProject
         public void GivenIncorrectTypeIndianCensusDataFile_WhenReaded_ShouldReturnCustomException()
         {
             var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, IncorrectTypeIndianCensusStateFilePath, IndianStateCensusHeaders));
-            Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE, CensusException.exceptionType);       }
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE, CensusException.exceptionType);       
+        }
+
+        [Test]
+        public void GivenIncorrectDelimiterIndianCensusDataFile_WhenReaded_ShouldReturnCustomException()
+        {
+            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, IncorrectDelimiterTypeIndianCensusStateFilePath, IndianStateCensusHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER, CensusException.exceptionType);
+        }
     }
 }
