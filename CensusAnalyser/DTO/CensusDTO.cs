@@ -30,5 +30,16 @@ namespace IndianStateCensusAnalyser.DTO
             area = CensusDataDao.area;
             density = CensusDataDao.density;
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CensusDTO"/> class.
+        /// </summary>
+        /// <param name="StateCodeDao">The state code DAO.</param>
+        public CensusDTO(StateCodeDAO StateCodeDao)
+        {
+            SerialNumber = StateCodeDao.SerialNumber;
+            StateName = StateCodeDao.StateName;
+            tin = StateCodeDao.tin;
+            StateCode = StateCodeDao.StateCode;
+        }
     }
 }

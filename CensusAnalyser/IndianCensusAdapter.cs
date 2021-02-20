@@ -31,6 +31,8 @@ namespace IndianStateCensusAnalyser
                 string[] column = data.Split(",");               
                 if (csvFilePath.Contains("IndiaStateCensusData.csv"))
                     dataMap.Add(column[0], new CensusDTO(new CensusDataDAO(column[0], column[1], column[2], column[3])));
+                if (csvFilePath.Contains("IndiaStateCodeData.csv"))
+                    dataMap.Add(column[0], new CensusDTO(new StateCodeDAO(column[0], column[1], column[2], column[3])));
             }
             return dataMap;
         }
