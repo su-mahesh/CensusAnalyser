@@ -19,7 +19,7 @@ namespace NUnitTestProject
         /// The indian state census file path
         /// </summary>
         static readonly string IndianStateCensusFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/IndiaStateCensusData.csv";
-        static readonly string WrongIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCensusData.csv";
+        static readonly string NonExistIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCensusData.csv";
         static readonly string IncorrectTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/IndiaStateCensusData.txt";
         static readonly string IncorrectDelimiterTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IncorrectDelimiterIndiaStateCensusData.csv";
         static readonly string IncorrectHeaderTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IncorrectHeaderIndiaStateCensusData.csv";
@@ -32,6 +32,7 @@ namespace NUnitTestProject
         /// The indian state code file path
         /// </summary>
         static readonly string IndianStateCodeFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IndiaStateCodeData.csv";
+        static readonly string NonExistIndiaStateCodeFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCodeData.csv";
 
         /// <summary>
         /// The census analyser object declaration
@@ -65,7 +66,7 @@ namespace NUnitTestProject
         [Test]
         public void GivenNonExistIndianCensusDataFile_WhenReaded_ShouldReturnCustomException()
         {
-            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, WrongIndianCensusStateFilePath, IndianStateCensusHeaders));
+            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, NonExistIndianCensusStateFilePath, IndianStateCensusHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, CensusException.exceptionType);
         }
         /// <summary>
@@ -95,12 +96,24 @@ namespace NUnitTestProject
             var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, IncorrectHeaderTypeIndianCensusStateFilePath, IndianStateCensusHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_HEADER, CensusException.exceptionType);
         }
-
+        /// <summary>
+        /// Givens the indian state code file when readed should return data count.
+        /// </summary>
         [Test]
         public void GivenIndianStateCodeFile_WhenReaded_ShouldReturnDataCount()
         {
             stateRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndianStateCodeFilePath, IndianStateCodeHeaders);
             Assert.AreEqual(37, stateRecord.Count);
+        }
+
+        /// <summary>
+        /// Givens the non exist indian state code file when readed should return custom exception.
+        /// </summary>
+        [Test]
+        public void GivenNonExistIndianStateCodeFile_WhenReaded_ShouldReturnCustomException()
+        {
+            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, NonExistIndiaStateCodeFilePath, IndianStateCodeHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, CensusException.exceptionType);
         }
     }
 }
