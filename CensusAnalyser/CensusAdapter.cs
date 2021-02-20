@@ -4,7 +4,7 @@ namespace IndianStateCensusAnalyser
 {
     public abstract class CensusAdapter
     {
-        string[] censusData;
+        string[] CensusData;
         /// <summary>
         /// Gets the census data.
         /// </summary>
@@ -28,8 +28,12 @@ namespace IndianStateCensusAnalyser
             {
                 throw new CensusAnalyserException("invalid file type", CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
             }
-            censusData = File.ReadAllLines(csvFilePath);
-                return censusData;
+            CensusData = File.ReadAllLines(csvFilePath);
+            if (CensusData[0] != dataHeader)
+            {
+                throw new CensusAnalyserException("incorrect header in data", CensusAnalyserException.ExceptionType.INCORRECT_HEADER);
+            }
+            return CensusData;
         }
     }
 }

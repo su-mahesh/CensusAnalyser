@@ -16,6 +16,8 @@ namespace NUnitTestProject
         static readonly string WrongIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCensusData.csv";
         static readonly string IncorrectTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/IndiaStateCensusData.txt";
         static readonly string IncorrectDelimiterTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IncorrectDelimiterIndiaStateCensusData.csv";
+        static readonly string IncorrectHeaderTypeIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/CensusAnalyser/NUnitTestProject/CSVFiles/IncorrectHeaderIndiaStateCensusData.csv";
+        
         /// <summary>
         /// The census analyser object declaration
         /// </summary>
@@ -61,6 +63,13 @@ namespace NUnitTestProject
         {
             var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, IncorrectDelimiterTypeIndianCensusStateFilePath, IndianStateCensusHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER, CensusException.exceptionType);
+        }
+
+        [Test]
+        public void GivenIncorrectHeaderIndianCensusDataFile_WhenReaded_ShouldReturnCustomException()
+        {
+            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, IncorrectHeaderTypeIndianCensusStateFilePath, IndianStateCensusHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_HEADER, CensusException.exceptionType);
         }
     }
 }

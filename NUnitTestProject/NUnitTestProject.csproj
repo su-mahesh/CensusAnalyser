@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <None Remove="CSVFiles\IncorrectDelimiterIndiaStateCensusData.csv" />
+    <None Remove="CSVFiles\IncorrectHeaderIndiaStateCensusData.csv" />
     <None Remove="CSVFiles\IndiaStateCensusData.csv" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="CSVFiles\IncorrectHeaderIndiaStateCensusData.csv" />
     <Content Include="CSVFiles\IncorrectDelimiterIndiaStateCensusData.csv" />
     <Content Include="CSVFiles\IndiaStateCensusData.csv" />
   </ItemGroup>
