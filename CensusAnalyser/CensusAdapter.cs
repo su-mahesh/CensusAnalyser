@@ -4,6 +4,7 @@ namespace IndianStateCensusAnalyser
 {
     public abstract class CensusAdapter
     {
+        string[] censusData;
         /// <summary>
         /// Gets the census data.
         /// </summary>
@@ -19,11 +20,12 @@ namespace IndianStateCensusAnalyser
         /// </exception>
         protected string[] GetCensusData(string csvFilePath, string dataHeader) 
         {
-            if (File.Exists(csvFilePath))
+            if (!File.Exists(csvFilePath))
             {
-                return File.ReadAllLines(csvFilePath);
+                throw new CensusAnalyserException("file not found", CensusAnalyserException.ExceptionType.FILE_NOT_FOUND);
             }
-            return null;
+            censusData = File.ReadAllLines(csvFilePath);
+                return censusData;
         }
     }
 }

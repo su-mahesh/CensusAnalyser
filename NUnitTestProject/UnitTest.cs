@@ -13,6 +13,7 @@ namespace NUnitTestProject
     {
         static readonly string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
         static readonly string IndianStateCensusFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/IndiaStateCensusData.csv";
+        static readonly string WrongIndianCensusStateFilePath = "C:/Users/Mahesh Kangude/source/repos/IndianStateAnalyser/NUnitTestProject/CSVFiles/NonExistIndiaStateCensusData.csv";
 
         /// <summary>
         /// The census analyser object declaration
@@ -37,6 +38,13 @@ namespace NUnitTestProject
         {
             totalRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndianStateCensusFilePath, IndianStateCensusHeaders);
             Assert.AreEqual(29, totalRecord.Count);
+        }
+
+        [Test]
+        public void GivenNonExistIndianCensusDataFile_WhenReaded_ShouldReturnCustomException()
+        {
+            var CensusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(Country.INDIA, WrongIndianCensusStateFilePath, IndianStateCensusHeaders));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, CensusException.exceptionType);
         }
     }
 }
