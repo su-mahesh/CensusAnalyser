@@ -24,6 +24,10 @@ namespace IndianStateCensusAnalyser
             {
                 throw new CensusAnalyserException("file not found", CensusAnalyserException.ExceptionType.FILE_NOT_FOUND);
             }
+            if (Path.GetExtension(csvFilePath) != ".csv")
+            {
+                throw new CensusAnalyserException("invalid file type", CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
+            }
             censusData = File.ReadAllLines(csvFilePath);
                 return censusData;
         }
