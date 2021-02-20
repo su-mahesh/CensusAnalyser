@@ -6,7 +6,9 @@ using static IndianStateCensusAnalyser.CensusAnalyser;
 
 namespace NUnitTestProject
 {
-
+    /// <summary>
+    /// test cases class
+    /// </summary>
     public class Tests
     {
         static readonly string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
